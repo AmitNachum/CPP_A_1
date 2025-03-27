@@ -101,7 +101,7 @@ graph::Graph *graph::Algorithms::kruskalsAlgorithm(Graph *g){
         }
     }
 
-    std::sort(edges, edges + edgeCount, Algorithms::compare);
+    graph::Algorithms::customSort(edges, edges + edgeCount, Algorithms::compare);
 
     Graph *MST = new Graph(len);
     Union_Find *uf = new Union_Find(len);
@@ -226,4 +226,31 @@ graph::Graph *graph::Algorithms::dijkstraAlgorithm(Graph *g, int s){
     delete[] visited;
     delete pq;
     return SPT;
+}
+
+
+
+void Algorithms::customSort(Edge *start, Edge *end,bool compare(const Edge *,const Edge *)){
+    int i = 0;
+    int j = i + 1;
+    int size = end - start;
+
+    for (int i = 0; i < size; i++)
+    { 
+        for (int j = i + 1; j < size; j++)
+        {
+            if (!compare( &start[i], &start[j] ))
+            {
+                Edge temp = start[i];
+                start[i] = start[j];
+                start[j] = temp;
+            }
+            
+        }
+        
+    }
+    
+
+    
+    
 }

@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
+#include "doctest/doctest.h"
 #include "Graph.hpp"
 #include "Algorithms.hpp"
 #include <iostream>
@@ -22,6 +22,7 @@ TEST_CASE("BFS and DFS Traversal") {
         Algorithms::bfs(&g, 0);
         CHECK(true); // No assertion, just testing for successful traversal.
     }
+    std::cout << "\n";
 
     SUBCASE("DFS Traversal") {
         Algorithms::dfs(&g, 0);

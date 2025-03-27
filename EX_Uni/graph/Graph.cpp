@@ -123,7 +123,7 @@ void Graph::removeEdge(int u, int v) {
         return;
     }
 
-    if (prev2== nullptr){        // curr points to the first Node in the linked list
+    if (prev2== nullptr){        
         adjList[v] = curr2->next;
     }else{
         prev2->next = curr2->next;

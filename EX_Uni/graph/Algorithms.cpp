@@ -5,8 +5,8 @@
 #include "../Queue/Queue.hpp"
 #include <iostream>
 
-using namespace graph;
 
+    
 void graph::Algorithms::bfs(Graph *g, int vertex){
     
     int len = g->getVerAmount();
@@ -122,6 +122,7 @@ graph::Graph *graph::Algorithms::kruskalsAlgorithm(Graph *g){
 }
 
 graph::Graph *graph::Algorithms::primsAlgorithm(Graph *g){
+    
     Node** adjList = g->getAdj();
     int len = g->getVerAmount();
 
@@ -229,7 +230,7 @@ graph::Graph *graph::Algorithms::dijkstraAlgorithm(Graph *g, int s){
 
 
 
-void Algorithms::customSort(Edge *start, Edge *end,bool compare(const Edge *,const Edge *)){
+void graph::Algorithms::customSort(Edge *start, Edge *end,bool compare(const Edge *,const Edge *)){
     int i = 0;
     int j = i + 1;
     int size = end - start;

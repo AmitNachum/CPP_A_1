@@ -1,8 +1,8 @@
 #include "Graph.hpp"
 #include "Algorithms.hpp"
 #include <iostream>
-
 using namespace graph;
+
 
 int main() {
     Graph g(5); 

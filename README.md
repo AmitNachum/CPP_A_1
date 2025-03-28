@@ -22,8 +22,7 @@ This project is an implementation of various graph algorithms using C++ without 
 The project is structured as follows:
 
 ```
-- Graph/         (Contains Graph-related files)
-- Algorithms/    (Contains Graph Algorithm files)
+- graph/         (Contains Graph and algorithms files)
 - Priority_Queue/(Contains Priority Queue files)
 - Queue/         (Contains Queue files)
 - Stack/         (Contains Stack files)
@@ -34,7 +33,7 @@ The project is structured as follows:
 
 ### Testing Output (Actual Output Generation)
 
-To compile the `testingOutputG.cpp` file, use the `testingOutputG.mk` makefile with the following command:
+To compile the `testingOutputG.cpp` file, use the `testingOutputG.mk` makefile under the  EX_Uni directory with the following command:
 
 ```
 make -f testingOutputG.mk
@@ -48,7 +47,7 @@ valgrind ./testingOutputG
 
 ### Doctest Testing (Unit Testing)
 
-To compile the `testG.cpp` file (Doctest), use the `testG.mk` makefile with the following command:
+To compile the `testG.cpp` file (Doctest), use the `testG.mk` makefile under the  EX_Uni directory with the following command:
 
 ```
 make -f testG.mk

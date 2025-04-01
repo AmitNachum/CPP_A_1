@@ -35,7 +35,7 @@ void PriorityQueue::heapify(int i){
 
 int PriorityQueue::peekMin(){
     if(size <= 0){
-        throw std::out_of_range("size is a positive number");
+        throw "size is a positive number";
     }
 
     return array[0];
@@ -45,9 +45,11 @@ int PriorityQueue::peekMin(){
 
 
 int PriorityQueue::extractMin(){
+    
     if(size <= 0){
-        throw std::out_of_range("size is a positive number");
+        throw "size is a positive number";
     }
+
     if (size == 1)
     {
         size--;
@@ -72,9 +74,10 @@ void PriorityQueue::deleteNode(int key){
             break;
         }
    }
+
    if (index == -1)
    {
-    throw std::out_of_range("Item was not found");
+    throw "Item was not found";
    }
    if (index == size - 1)
    {

@@ -28,7 +28,7 @@ void stk::push(int number){
 int stk::pop(){
     if (this->top < 0)
     {
-        throw std::out_of_range("stack is empty");
+        throw "stack is empty";
     }
     int res = stack[top];
     this->top--;
@@ -39,7 +39,7 @@ int stk::pop(){
 int stk::peek(){
     if (this->top < 0)
     {
-        throw std::out_of_range("no elements in the stack");
+        throw "no elements in the stack";
     }
     return this->stack[top];
     

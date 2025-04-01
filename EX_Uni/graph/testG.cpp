@@ -66,3 +66,15 @@ TEST_CASE("Dijkstra's Algorithm") {
     CHECK(SPT != nullptr);
     delete SPT;
 }
+
+TEST_CASE("Negative Edges in Dijkstra's Algorithm") {
+    Graph g(5);
+    g.addEdge(0, 1, 1);
+    g.addEdge(1, 2, -1); // negative edge
+    g.addEdge(2, 3, 1);
+    g.addEdge(3, 4, 1);
+
+    // Check if std::invalid_argument is thrown
+    CHECK_THROWS(Algorithms::dijkstraAlgorithm(&g, 0));
+}
+

@@ -68,12 +68,16 @@ void Graph::expandGraph(int newAmount){
     
 }
 
+
 void Graph::addEdge(int u, int v, int weight) {
+
     if (!isWithinBounds(u) || !isWithinBounds(v)) {
         int max = (u > v) ? u : v;
         expandGraph(max + 1);
         
     }
+     
+
 
     Node* newNode = new Node(v, weight);
     newNode->next = adjList[u];
@@ -86,8 +90,7 @@ void Graph::addEdge(int u, int v, int weight) {
 
 void Graph::removeEdge(int u, int v) {
     if (!isWithinBounds(u) || !isWithinBounds(v)) {
-        std::cerr << "Error: Vertex out of bounds" << std::endl;
-        return;
+        throw "Error: Vertex out of bounds";
     }
 
     Node* current = adjList[u];
@@ -99,8 +102,7 @@ void Graph::removeEdge(int u, int v) {
     }
 
     if (current == nullptr) {
-        std::cerr << "Error: Edge not found" << std::endl;
-        return;
+        throw "Error: Edge not found";
     }
 
     if (prev == nullptr) { 
@@ -119,8 +121,8 @@ void Graph::removeEdge(int u, int v) {
     }
 
     if (curr2 == nullptr){
-        std::cerr<< "Error: Edge not Found" << std::endl;
-        return;
+        throw "Error: Edge not Found";
+        
     }
 
     if (prev2== nullptr){        

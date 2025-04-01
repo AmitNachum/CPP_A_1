@@ -204,6 +204,11 @@ graph::Graph *graph::Algorithms::dijkstraAlgorithm(Graph *g, int s){
         while (curr != nullptr) {
             int u = curr->vertex;
             int weight = curr->weight;
+            if (weight < 0)
+            {
+                throw "Negative weight detected in Dijkstra's ALgorithm";
+            }
+            
 
             if (!visited[u] && dist[v] + weight < dist[u]) {
                 dist[u] = dist[v] + weight;

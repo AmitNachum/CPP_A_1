@@ -34,7 +34,7 @@ void Queue::offer(int number){
 int Queue::poll(){
     if (isEmpty())
     {
-        throw std::out_of_range("Queue is empty");
+        throw "Queue is empty";
     }
     int item = this->array[front];
     this->front = (this->front + 1) % this->capacity;
@@ -51,7 +51,7 @@ bool Queue::isEmpty(){
 int Queue::peek(){
     if (isEmpty())
     {
-        throw std::out_of_range("Queue is empty");
+        throw "Queue is empty";
 
     }
 

@@ -25,6 +25,7 @@ private:
     
     bool isWithinBounds(int vertex) const;
     void expandGraph(int newAmount);
+    
 public:
     Graph(int vertexAmount);
     ~Graph();

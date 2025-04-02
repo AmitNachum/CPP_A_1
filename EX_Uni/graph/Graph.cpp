@@ -9,6 +9,31 @@ Graph::Graph(int vertexAmount) : vertexAmount(vertexAmount) {
     }
 }
 
+Graph::Graph(Graph *other){
+
+    int amount = other->getVerAmount();
+    this->adjList = new Node*[amount]();
+    
+    for (int i = 0; i < amount; i++)
+    {
+        Node *currOther = other->adjList[i];       
+
+        while (currOther != nullptr)
+        {
+            int otherJth = currOther->vertex;
+            int otherWeight = currOther->weight;                                              
+
+            this->addEdge(i,otherJth,otherWeight);
+            currOther = currOther->next;
+        }
+        
+        
+    }
+
+    this->vertexAmount = amount;
+    
+}
+
 
 
 Graph::~Graph() {

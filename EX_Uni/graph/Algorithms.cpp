@@ -7,6 +7,60 @@
 
 
     
+
+
+bool graph::Algorithms::isConnectedGraph( Graph *g,int start)  {
+    if (!g->isWithinBounds(start))
+    {
+        throw "Error the start vertex is invalid";
+    }
+
+    stk stack;
+
+    int amount = g->getVerAmount();
+    bool *visited = new bool[amount]();
+    Node **adj = g->getAdj();
+
+    stack.push(start);
+    visited[start] = true;
+
+    while (!stack.isEmpty())
+    {
+        int u = stack.pop();
+        Node *curr = adj[u];
+
+        while (curr != nullptr)
+        {
+            int neighbor = curr->vertex;
+            if (!visited[neighbor])
+            {
+                visited[neighbor] = true;
+                stack.push(neighbor);
+            }
+            curr = curr->next;
+            
+        }
+        
+        
+
+    }
+
+    for (size_t i = 0; i < amount; i++)
+    {
+        if (!visited[i])
+        {
+            delete[] visited;
+            return false;
+
+        }
+        
+    }
+
+    delete [] visited;
+    return true;
+    
+
+}
 void graph::Algorithms::bfs(Graph *g, int vertex){
     
     int len = g->getVerAmount();
@@ -85,6 +139,11 @@ void graph::Algorithms::dfs(Graph *g, int s){
 }
 
 graph::Graph *graph::Algorithms::kruskalsAlgorithm(Graph *g){
+    if (!isConnectedGraph(g,0))
+    {
+        throw "Graph is not connected";
+    }
+    
     Node** adjList = g->getAdj();
     int len = g->getVerAmount();
     Edge *edges = new Edge[len * len];
@@ -122,6 +181,10 @@ graph::Graph *graph::Algorithms::kruskalsAlgorithm(Graph *g){
 }
 
 graph::Graph *graph::Algorithms::primsAlgorithm(Graph *g){
+    if (!isConnectedGraph(g,0))
+    {
+        throw "Graph is not connected";
+    }
     
     Node** adjList = g->getAdj();
     int len = g->getVerAmount();

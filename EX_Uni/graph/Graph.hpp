@@ -23,13 +23,14 @@ private:
       
 
     
-    bool isWithinBounds(int vertex) const;
     void expandGraph(int newAmount);
     
 public:
     Graph(int vertexAmount);
+    Graph(Graph *other);
     ~Graph();
 
+    bool isWithinBounds(int vertex) const;
     void addEdge(int u, int v, int weight);   
     void removeEdge(int u, int v);            
     void printGraph();                        

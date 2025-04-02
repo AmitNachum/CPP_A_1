@@ -21,13 +21,13 @@ namespace graph
     class Algorithms{
     private:
         static void dfsTravers(Graph *g, int vertex, Colors *color, int *discoveryTime, int *finishTime, int *time);
-
         static void customSort(Edge *start, Edge *end,bool compare(const Edge *,const Edge *));
         static bool compare(const Edge *a, const Edge *b){
             return (a->weight) < (b->weight);
         }
 
     public:
+        static bool isConnectedGraph(Graph *g,int s) ;
         static void bfs(Graph *g, int vertex); 
         static void dfs(Graph *g, int s); 
         static Graph* kruskalsAlgorithm(Graph *g); 

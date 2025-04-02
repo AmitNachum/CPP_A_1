@@ -6,6 +6,36 @@
 
 using namespace graph;
 
+
+
+TEST_CASE("Prim's Algorithm on Disconnected Graph") {
+    Graph g(5);
+    g.addEdge(0, 1, 1);
+    g.addEdge(2, 3, 1);  
+
+    
+    CHECK_THROWS_WITH(Algorithms::primsAlgorithm(&g), "Graph is not connected");
+}
+
+
+TEST_CASE("Check Graph Connectivity") {
+     Graph g(5);
+    g.addEdge(0, 1, 1);
+    g.addEdge(1, 2, 1);
+    g.addEdge(2, 3, 1);
+    g.addEdge(3, 4, 1);
+
+    CHECK(Algorithms::isConnectedGraph(&g, 0) == true);
+
+    //disconnected
+     Graph g2(5);
+    g2.addEdge(0, 1, 1);
+    g2.addEdge(2, 3, 1); 
+
+    CHECK(Algorithms::isConnectedGraph(&g2, 0) == false);
+}
+
+
 TEST_CASE("BFS and DFS Traversal") {
     Graph g(5); 
     g.addEdge(0, 1, 1);

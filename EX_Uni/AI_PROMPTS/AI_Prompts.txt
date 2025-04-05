@@ -113,7 +113,7 @@ It appears that Kruskal’s implementation might be incorrect (choosing heavier 
 
 
 --REMARK--:
-"Using chatGPT to verify any mistakes in the algorithms,by then the outputs of course are now correct."
+"Using chatGPT to verify any mistakes in the algorithms,by now the outputs of course are now correct."
 
 
 

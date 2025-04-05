@@ -1,0 +1,207 @@
+Prompt 1
+
+BFS Traversal: 0 4 3 2 1 
+DFS Traversal: 0 4 3 2 1 
+MST using Kruskal's Algorithm: 
+Vertex 0 : -> (3, weight: 3)-> (2, weight: 4)-> (4, weight: 6)
+Vertex 1 : -> (4, weight: 2)
+Vertex 2 : -> (0, weight: 4)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 2)-> (0, weight: 6)
+
+MST using Prim's Algorithm: 
+Vertex 0 : -> (3, weight: 3)-> (1, weight: 1)
+Vertex 1 : -> (4, weight: 2)-> (2, weight: 3)-> (0, weight: 1)
+Vertex 2 : -> (1, weight: 3)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 2)
+
+Shortest Path Tree using Dijkstra's Algorithm: 
+Vertex 0 : -> (3, weight: 3)-> (2, weight: 4)-> (1, weight: 1)
+Vertex 1 : -> (4, weight: 3)-> (0, weight: 1)
+Vertex 2 : -> (0, weight: 4)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 3)
+
+are the outputs correct?
+
+
+Answer:
+
+Let's analyze each part of the output.
+
+✅ BFS & DFS Traversal:
+BFS Traversal: 0 4 3 2 1
+
+DFS Traversal: 0 4 3 2 1
+
+The traversal orders can be valid depending on how the graph is constructed and the order in which edges are traversed. For both BFS and DFS to produce the same order, the graph likely has a tree-like structure or special connection pattern.
+This is possible but unusual. Double-check your traversal implementation to make sure you are actually using BFS and DFS correctly.
+
+✅ MST using Kruskal's Algorithm:
+yaml
+Copy
+Edit
+Vertex 0 : -> (3, weight: 3) -> (2, weight: 4) -> (4, weight: 6)
+Vertex 1 : -> (4, weight: 2)
+Vertex 2 : -> (0, weight: 4)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 2) -> (0, weight: 6)
+Total Weight: 
+3
++
+4
++
+6
++
+2
+=
+15
+3+4+6+2=15
+
+The edges are selected in ascending order of weight without forming cycles.
+
+Appears to be correct if this is a connected, undirected graph.
+
+✅ MST using Prim's Algorithm:
+yaml
+Copy
+Edit
+Vertex 0 : -> (3, weight: 3) -> (1, weight: 1)
+Vertex 1 : -> (4, weight: 2) -> (2, weight: 3) -> (0, weight: 1)
+Vertex 2 : -> (1, weight: 3)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 2)
+Total Weight: 
+3
++
+1
++
+2
++
+3
+=
+9
+3+1+2+3=9
+
+This weight does not match the Kruskal’s MST (15).
+
+This suggests that either Kruskal's MST is wrong, or Prim’s algorithm used a different approach.
+
+❓ Why the Difference in MSTs (Kruskal vs Prim):
+Kruskal’s algorithm seems to have chosen a path with higher weight (6).
+
+Prim’s algorithm appears to have selected a cheaper path (2, 3, 1, 3).
+
+✅ Shortest Path Tree using Dijkstra's Algorithm:
+yaml
+Copy
+Edit
+Vertex 0 : -> (3, weight: 3) -> (2, weight: 4) -> (1, weight: 1)
+Vertex 1 : -> (4, weight: 3) -> (0, weight: 1)
+Vertex 2 : -> (0, weight: 4)
+Vertex 3 : -> (0, weight: 3)
+Vertex 4 : -> (1, weight: 3)
+This appears to be correct if the graph is weighted and connected.
+
+Dijkstra's algorithm finds the shortest path from the starting vertex (0) to all others.
+
+🔍 Summary of Issues:
+The MSTs from Kruskal and Prim are not the same.
+
+It appears that Kruskal’s implementation might be incorrect (choosing heavier edges).
+
+
+--REMARK--:
+"Using chatGPT to verify any mistakes in the algorithms,by then the outputs of course are now correct."
+
+
+
+Prompt:
+can you give me an example of how to create a test file in order to use DOCTEST with my graph?
+
+Answer:
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest.h"
+
+#include "../graph/Graph.h"
+#include "../graph/Algorithms.h"
+
+using namespace graph;
+
+TEST_CASE("Test Kruskal's MST") {
+    Graph g(5);  // 5 vertices
+    g.addEdge(0, 1, 1);
+    g.addEdge(0, 3, 3);
+    g.addEdge(1, 4, 2);
+    g.addEdge(1, 2, 3);
+
+    auto mst = Algorithms::kruskalMST(g);
+
+    CHECK(mst.size() == 4);  // MST should have V - 1 edges
+
+    int total = 0;
+    for (auto e : mst) total += e.weight;
+
+    CHECK(total == 9);  // Expected MST weight
+}
+
+
+--REMARK--
+"The following was suppose to let me Understand how does a doctest file is constructed"
+
+
+
+
+
+Prompt:
+==48373== HEAP SUMMARY:
+==48373==     in use at exit: 20 bytes in 1 blocks
+==48373==   total heap usage: 27 allocs, 26 frees, 75,936 bytes allocated
+==48373== 
+==48373== LEAK SUMMARY:
+==48373==    definitely lost: 20 bytes in 1 blocks
+==48373==    indirectly lost: 0 bytes in 0 blocks
+==48373==      possibly lost: 0 bytes in 0 blocks
+==48373==    still reachable: 0 bytes in 0 blocks
+==48373==         suppressed: 0 bytes in 0 blocks
+==48373== Rerun with --leak-check=full to see details of leaked memory
+==48373== 
+
+how can i see where was the memory leak?
+
+Answer:
+To see where exactly the memory leak occurred, you need to run Valgrind with more detailed logging. To do this, use the --leak-check=full option along with --show-leak-kinds=all.
+
+📌 Command to Run
+bash
+Copy
+Edit
+valgrind --leak-check=full --show-leak-kinds=all ./testG
+📌 What This Does
+--leak-check=full — Provides detailed information about memory leaks.
+
+--show-leak-kinds=all — Shows all types of leaks (definitely lost, indirectly lost, possibly lost, still reachable).
+
+📌 How to Read the Output
+It will show exactly where the memory was allocated and not properly freed.
+
+You will see a stack trace pointing to the line in your code responsible for the leak.
+
+📌 Tip
+If you want to narrow down the search, try adding:
+
+bash
+Copy
+Edit
+--track-origins=yes
+This helps in tracing uninitialized memory reads, which could also be helpful if the leak is caused by improper use of dynamically allocated memory.
+
+Would you like me to help you analyze the output once you run this? 😊
+
+
+--REMARK--
+"With Valgrind in a case of a detection of a memory leak, i was looking for a flag 
+to identify exactly where and why the leak happened".
+
+
